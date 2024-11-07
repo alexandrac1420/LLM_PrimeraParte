@@ -91,17 +91,23 @@ To run the service, follow these steps:
    ```
 
 3. **Access the interactive page** at [http://localhost:8000/chain/playground/](http://localhost:8000/chain/playground/). This page allows you to define a language and a phrase to be translated into that language.
+   ![Imagen de WhatsApp 2024-11-07 a las 15 45 51_31f08083](https://github.com/user-attachments/assets/1dcd207f-9837-4d1d-b559-6280755cb752)
+   ![Imagen de WhatsApp 2024-11-07 a las 15 46 05_58d2c5d1](https://github.com/user-attachments/assets/f4773a85-0f09-41ca-b773-611d01c5e85b)
 
-4. **Run the client** in another terminal to send a static message to the server and receive the translation to Italian:
+
+
+5. **Run the client** in another terminal to send a static message to the server and receive the translation to Italian:
 
    ```bash
    python langchainclient.py
    ```
+   ![Imagen de WhatsApp 2024-11-07 a las 15 46 37_450b9c7a](https://github.com/user-attachments/assets/eacdadcf-b588-4fd7-bce4-b298372bdf90)
+
 
 ## Architecture
 
 ### Architecture Diagram
-![alt text](image.png)
+![alt text](https://github.com/alexandrac1420/LLM_PrimeraParte/blob/master/pictures/Arquitectura.png)
 The architecture of this project follows a client-server model where:
 
 1. **The user** interacts with the **client** (Python script or web interface).
