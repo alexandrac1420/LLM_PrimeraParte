@@ -4,6 +4,7 @@ This project implements an application based on LangChain to demonstrate basic l
 
 
 The project provides an environment to explore the use of LangChain, allowing the creation of prompt templates, processing chains with memory, and handling of custom messages. Detailed examples of client and server files are included to manage requests and responses from language models.
+![alt text](pictures/Funcionamiento.gif)
 
 ## Getting Started
 
