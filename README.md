@@ -109,6 +109,8 @@ To run the service, follow these steps:
 
 ### Architecture Diagram
 ![alt text](https://github.com/alexandrac1420/LLM_PrimeraParte/blob/master/pictures/Arquitectura.png)
+
+
 The architecture of this project follows a client-server model where:
 
 1. **The user** interacts with the **client** (Python script or web interface).
