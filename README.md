@@ -1,216 +1,134 @@
-# Parcial segundo corte 
+# LangChain Basix App Project
 
-Este proyecto despliega una aplicación web que permite realizar dos algoritmos esenciales en la ciencia de la computación: la búsqueda binaria y la búsqueda lineal, a través de una arquitectura de microservicios. Un servidor proxy recibe las solicitudes de los usuarios y las distribuye entre dos servidores de búsqueda disponibles mediante un algoritmo de round-robin.
-
-## Introducción
-Las instrucciones a continuación te permitirán obtener una copia de este proyecto y ponerlo en funcionamiento tanto en tu máquina local como en un servidor EC2 en AWS para fines de desarrollo y pruebas.
-
-## Prerrequisitos
-Para poder ejecutar este proyecto, necesitas instalar las siguientes herramientas y configurar sus dependencias:
-
-1. **Java(version 17 o superior)**
-    ```sh
-    java -version
-    ```
-    Debería mostrar algo como:
-    ```sh
-    java version "17.0.7"
-    OpenJDK Runtime Environment (build 17.0.7+7-LTS)
-    OpenJDK 64-Bit Server VM (build 17.0.7+7-LTS, mixed mode, sharing)
-    ```
-2. **Maven**
-    - Descarga maven [aqui](http://maven.apache.org/download.html)
-    - Sigue las siguientes instrucciones [aqui](http://maven.apache.org/download.html#Installation)
-
-    Verifica la descarga
-    ```sh
-    mvn -version
-    ```
-    Debería mostrar algo como:
-    ```sh
-    Apache Maven 3.2.5 (12a6b3acb947671f09b81f49094c53f426d8cea1; 2014-12-14T12:29:23-05:00)
-    Maven home: /Users/dnielben/Applications/apache-maven-3.2.5
-    Java version: 1.8.0, vendor: Oracle Corporation
-    Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre
-    Default locale: es_ES, platform encoding: UTF-8
-    OS name: "mac os x", version: "10.10.1", arch: "x86_64", family: "mac"
-    ```
-
-3. **Git**
-    - Instala git siguiendo las siguientes instrucciones [aqui](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
-    verifica la instalación
-    ```sh
-    git --version
-    ```
-    Debería mostrar algo como:
-    ```sh
-    git version 2.31.1
-    ```
+This project implements an application based on LangChain to demonstrate basic language model interaction functionalities. The steps described in [LangChain Tutorials](https://python.langchain.com/docs/tutorials/llm_chain/) were followed.
 
 
+The project provides an environment to explore the use of LangChain, allowing the creation of prompt templates, processing chains with memory, and handling of custom messages. Detailed examples of client and server files are included to manage requests and responses from language models.
 
-## Uso local de ParcialSegundoCorte
+## Getting Started
 
-### Características
-La aplicación permite:
+These instructions will get you a copy of the project up and running on your local machine and on AWS for development and testing purposes.
 
-1. **Buscar mediante búsqueda lineal**: dada una lista de números, busca un valor específico y devuelve la posición si se encuentra.
-2. **Buscar mediante búsqueda binaria**: ordena automáticamente la lista antes de aplicar la búsqueda binaria, por lo que el usuario no necesita ordenarla previamente.
-3. **Distribuir carga**: el proxy distribuye las solicitudes usando round-robin entre dos instancias de Math Service.
+## Prerequisites
 
-### Pasos para correr la aplicación localmente
+Make sure to have the following tools installed to run this project:
 
-1. Clona el repositorio 
+1. **Python (version 3.8 or higher)**
+   - Download it from [python.org](https://www.python.org/downloads/).
+
+   ```sh
+   python --version
+   ```
+   It should display something like:
+
+   ```sh
+   Python 3.9.7
+   ```
+
+2. **Git**
+   - Download it from [git-scm.com](https://git-scm.com/downloads).
+
+   ```sh
+   git --version
+   ```
+   It should display something like:
+
+   ```sh
+   git version 2.31.1
+   ```
+
+## Installation and Local Setup
+
+### Clone the repository
+
+Clone the repository to your local machine:
 
 ```bash
-    git clone https://github.com/alexandrac1420/ParcialSegundoCorte.git
-    cd ParcialSegundoCorte
+    git clone https://github.com/alexandrac1420/LLM_PrimeraParte.git
+    cd LLM_PrimeraParte
 ```
 
-2. Realiza el empaquetado del archivo 
+### API Key Configuration in Jupyter Notebook
 
-```bash
-    mvn package
-```
+In Jupyter Notebook, set up the environment variable for the OpenAI API key by creating a new Python environment:
+1. Go to **New Kernel** > **Python Environment** > **Create Python Environment**.
+2. Make sure to select the `venv` option.
+3. If any additional package is required when running the first command, install it to ensure all commands run correctly.
 
-3. Abre tres terminales diferentes y ejecuta el comando en cada uno de estas
+## Local Usage of LangChain Basix App
 
-* **Proxy** : Para la terminal donde se vera el proxy
-    ```bash
-        java -jar target/ParcialSegundoCorte-0.0.1-SNAPSHOT.jar --server.port=8080
-    ```
+### Features
 
-* **MathServer1**: Para la temrminal donde se ver uno de los Math Service
-    ```bash
-        java -jar target/ParcialSegundoCorte-0.0.1-SNAPSHOT.jar --server.port=8081
-    ```
+The project includes:
 
-* **MathServer2**:Y en la ultima terminal donde se vera el otro Math service
-    ```bash
-        java -jar target/ParcialSegundoCorte-0.0.1-SNAPSHOT.jar --server.port=8082
-    ```
+1. **Prompt Templates**: Allows parameterization of requests sent to the model.
+2. **Processing Chains (LLM Chains)**: Integrates prompts and models to process requests in a chained manner.
+3. **Conversation Memory**: Stores interaction history.
+4. **Custom Message Handling**: Uses `HumanMessage` and `SystemMessage` types.
 
-![alt text](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/terminales.png)
+### Running Examples
 
-4. Ingresa a http://localhost:8080
+To run the service, follow these steps:
 
+1. **Execute all commands in the Jupyter Notebook** following the tutorial and ensure the OpenAI API key is set to a valid one.
 
-En caso de que no se encuentre el numero en la lista se mostrara -1 en la parte de output del mensaje json
+2. **Start the server** from a terminal by running:
 
-![alt text](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/local.png)
+   ```bash
+   python langchainserver.py
+   ```
 
+   You should see an output similar to:
 
-La terminal del proxy mostrará a que servicios manda la solicitud de los servidores Math
+   ```
+   LANGSERVE: Playground for chain "/chain/" is live at:
+   LANGSERVE:  │
+   LANGSERVE:  └──> /chain/playground/
+   LANGSERVE:
+   LANGSERVE: See all available routes at /docs/
+   INFO:     Application startup complete.
+   INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
+   ```
 
-### Ejemplo de Respuesta
-![image](https://github.com/user-attachments/assets/03b1432a-628b-44c7-aedb-b0b7b15f0e64)
+3. **Access the interactive page** at [http://localhost:8000/chain/playground/](http://localhost:8000/chain/playground/). This page allows you to define a language and a phrase to be translated into that language.
 
+4. **Run the client** in another terminal to send a static message to the server and receive the translation to Italian:
 
+   ```bash
+   python langchainclient.py
+   ```
 
-## Despliegue en AWS EC2
+## Architecture
 
-![AWS](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(2).gif)
+### Architecture Diagram
+![alt text](image.png)
+The architecture of this project follows a client-server model where:
 
-Para desplegar la aplicación en AWS EC2, debes configurar varias instancias para el proxy y los Math Services, utilizando direcciones IP públicas para permitir que las instancias se comuniquen entre sí.
-
-### Pasos para Desplegar en EC2
-
-1. **Configurar las Instancias de EC2**
-   - Crea tres instancias EC2 en AWS:
-     - **Una instancia para el Proxy**.
-     - **Dos instancias para los Math Services**.
-   - Asegúrate de asignar IPs públicas a cada instancia y de habilitar las reglas de seguridad necesarias:
-     - **Permitir tráfico en el puerto 8080** en todas las instancias para permitir el acceso y comunicación entre los servicios.
-
-2. **Modificar la Configuración del Proxy**
-   - En el archivo `HttpConnectionExample` del proyecto, actualiza la lista de servidores con las IPs públicas de tus instancias de Math Services, todas escuchando en el puerto `8080`:
-     ```java
-     private final List<String> servers = Arrays.asList("http://<EC2-IP-1>:8080", "http://<EC2-IP-2>:8080");
-     ```
-
-3. **Subir el Archivo .jar a las Instancias**
-   - Empaqueta el proyecto usando Maven:
-     ```bash
-     mvn package
-     ```
-   - Usa SFTP para transferir el archivo .jar (`ParcialSegundoCorte-0.0.1-SNAPSHOT.jar`) a cada instancia de EC2.
-     ```bash
-     sftp -i <tu-llave.pem> ec2-user@<EC2-IP>
-     put ParcialSegundoCorte-0.0.1-SNAPSHOT.jar
-     ```
-
-4. **Instalar Java en Cada Instancia**
-   - Conéctate a cada instancia EC2 usando SSH:
-     ```bash
-     ssh -i <tu-llave.pem> ec2-user@<EC2-IP>
-     ```
-   - Instala Java (si aún no está instalado):
-     ```bash
-     sudo yum install java-17-amazon-corretto -y
-     ```
-
-5. **Ejecutar el Servicio en Cada Instancia**
-   - En la instancia del Proxy:
-     ```bash
-     java -jar ParcialSegundoCorte-0.0.1-SNAPSHOT.jar 
-     ```
-   - En cada instancia de Math Service:
-     ```bash
-     java -jar ParcialSegundoCorte-0.0.1-SNAPSHOT.jar 
-     ```
-
-6. **Acceder a la Aplicación**
-   - Ingresa a la dirección IP pública de la instancia del Proxy en el puerto `8080` (por ejemplo, `http://<Proxy-EC2-IP>:8080`) para realizar las búsquedas y demostrar el funcionamiento.
-   - El proxy distribuirá las solicitudes entre las instancias de Math Services utilizando balanceo de carga round-robin.
-
-    ![Image](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/ec2.png)
+1. **The user** interacts with the **client** (Python script or web interface).
+2. **The client** sends requests to the **server**.
+3. **The server** (implemented in `langchainserver.py`) receives and processes the requests using the LangChain library.
+4. **The server** communicates with the **OpenAI GPT language model** to get a response.
+5. **The server** updates the **conversation memory** with the interaction history.
+6. **The server** sends the response back to the **client**.
+7. **The client** displays the response to the **user**.
 
 
-## Arquitectura
-La arquitectura del sistema utiliza una configuración distribuida con varias instancias EC2 en AWS:
 
-1. **Browser**: Cliente que envía solicitudes de búsqueda (lineal o binaria) a través de una interfaz web.
-2. **Service Proxy (en EC2)**: Punto de entrada para todas las solicitudes de búsqueda, que distribuye las solicitudes a través de un balanceo de carga round-robin entre los servicios de matemáticas.
-3. **Math Services (en dos instancias EC2)**: Servidores que procesan la lógica de búsqueda, ejecutando la búsqueda lineal o binaria según lo solicitado y devolviendo los resultados al proxy.
+## Built With
 
-![Diagrama de arquitectura](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/Arquitectura.png)
+- [LangChain](https://langchain.com/) - Library for developing LLM applications.
+- [Jupyter Notebook](https://jupyter.org/) - Interactive development environment.
+- [OpenAI](https://openai.com/) - Language model provider.
 
+## Versioning
 
-## Diagrama de clases
-El sistema se compone de las siguientes clases principales:
-![Diagrama de clases](https://github.com/alexandrac1420/ParcialSegundoCorte/blob/master/pictures/DiagramaClases.png)
+I use [GitHub](https://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/alexandrac1420/LLM_PrimeraParte.git).
 
-1. **ProxyController**
+## Authors
 
-* Recibe solicitudes de búsqueda del cliente y las delega a HttpConnectionExample para su distribución entre los servidores de Math.
-
-
-2. **HttpConnectionExample**
-
-* Gestiona la distribución de solicitudes a las instancias de Math Services mediante round-robin, asegurando un balanceo de carga efectivo.
-
-3. **MathController**
-
-* Ejecuta los algoritmos de búsqueda lineal y binaria, retornando el resultado.
-
-4. **ParcialSegundoCorteApplication**
-
-* Clase principal que arranca la aplicación Spring Boot y configura el contexto de Spring.
-
-
-## Construido con
-
-* [Maven](https://maven.apache.org/) - Manejo de dependencias
-* [Spring Boot](https://spring.io/projects/spring-boot) - Framework backend
-* [Git](http://git-scm.com/) - Control de versiones
-
-
-## Authores
-
-* **Alexandra Cortes Tovar** - [alexandrac1420](https://github.com/alexandrac1420)
-
+- **Alexandra Cortes** - [alexandrac1420](https://github.com/alexandrac1420)
 
 ## License
 
-Este proyecto está licenciado bajo GNU.
+This project is licensed under GNU.
+
