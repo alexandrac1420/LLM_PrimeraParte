@@ -1,0 +1,63 @@
+@startuml
+!define RECTANGLE_CLASS rectangle
+skinparam rectangle {
+    BackgroundColor White
+    BorderColor Black
+    Shadowing false
+}
+
+package "Zona de Perímetro" {
+    RECTANGLE_CLASS NGFW as "Next-Generation Firewall"
+    RECTANGLE_CLASS IPS as "Intrusion Prevention System"
+    RECTANGLE_CLASS SIEM as "Security Information and Event Management"
+    RECTANGLE_CLASS EventLogging as "Registro de Eventos Centralizado"
+}
+
+package "Zona de Presentación" {
+    RECTANGLE_CLASS LoadBalancer as "Balanceador de Carga"
+    RECTANGLE_CLASS DDoSProtection as "Protección contra DDoS"
+    RECTANGLE_CLASS WAF as "Web Application Firewall"
+}
+
+package "Zona de Aplicación" {
+    RECTANGLE_CLASS MFA as "Autenticación Multifactor"
+    RECTANGLE_CLASS IAM as "Gestión de Identidades"
+    RECTANGLE_CLASS Microsegmentation as "Segmentación de Red y Microsegmentación"
+}
+
+package "Zona de Datos (Bases de Datos y Monitoreo)" {
+    RECTANGLE_CLASS Encryption as "Cifrado en Reposo y en Tránsito"
+    RECTANGLE_CLASS RBAC as "Control de Acceso Basado en Roles"
+    RECTANGLE_CLASS CCTVMonitoring as "Monitoreo de CCTV"
+    RECTANGLE_CLASS DataLogging as "Registro de Acceso a Datos"
+}
+
+package "Zona de Red e Infraestructura" {
+    RECTANGLE_CLASS VLANs as "Segmentación de Red (VLANs)"
+    RECTANGLE_CLASS IDS as "Sistema de Detección de Intrusiones"
+}
+
+
+
+NGFW --> EventLogging
+IPS --> EventLogging
+SIEM --> EventLogging
+EventLogging --> LoadBalancer
+
+LoadBalancer --> DDoSProtection
+DDoSProtection --> WAF
+
+WAF --> MFA
+MFA --> IAM
+IAM --> Microsegmentation
+
+Microsegmentation --> Encryption
+Encryption --> RBAC
+RBAC --> CCTVMonitoring
+RBAC --> DataLogging
+
+DataLogging --> VLANs
+CCTVMonitoring --> VLANs
+VLANs --> IDS
+
+
