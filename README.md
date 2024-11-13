@@ -8,7 +8,7 @@ The project provides an environment to explore the use of LangChain, allowing th
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine and on AWS for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine 
 
 ## Prerequisites
 
